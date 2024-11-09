@@ -61,6 +61,30 @@ st.markdown(
         text-align: center;
         margin-top: 10px;
     }
+    .section-header1 {
+        font-size: 20px;
+        color: #fff;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0;
+        
+    }
+    .section-header2 {
+        font-size: 15px;
+        color: #F3F3E0;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0;
+        
+    }
+    .section-header3 {
+        font-size: 15px;
+        color: #CBDCEB;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0;
+        
+    }
     .stImage > img {
         display: block;
         margin-left: auto;
@@ -80,7 +104,9 @@ st.markdown('<p class="subtitle">Advance Algo Project</p>', unsafe_allow_html=Tr
 st.markdown('<p class="section-header">Master of Technology</p>', unsafe_allow_html=True)
 st.markdown('<p class="section-header"> In </p>', unsafe_allow_html=True)
 st.markdown('<p class="section-header"> COMPUTER SCIENCE AND INFORMATION TECHNOLOGY </p>', unsafe_allow_html=True)
-st.image("logo.png")  # Replace "logo.png" with the actual filename or URL
+col0 =  st.columns(5)
+with col0[2]:
+    st.image("logo.png")  # Replace "logo.png" with the actual filename or URL
 st.markdown('<p class="subtitle1"> Subject :- Advance Algorithms </p>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle1"> Submitted to : Prof. Manish Kumar Bajpai </p>', unsafe_allow_html=True)
 st.markdown('<p class="h1head"> DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING </p>', unsafe_allow_html=True)
@@ -88,3 +114,31 @@ st.markdown('<p class="h1head"> NATIONAL INSTITUTE OF TECHNOLOGY WARANGAL </p>',
 st.markdown('<p class="h1head">November, 2024 </p>', unsafe_allow_html=True)
 
 st.divider()
+
+
+st.markdown('<h1 class="title">Group Member</p>', unsafe_allow_html=True)
+
+col1 =  st.columns(5)
+
+with col1[0]:
+   st.image("IMAGES/adarsh.png")
+   st.markdown('<p class="section-header1">Adarsh Tayde</p>', unsafe_allow_html=True)
+   st.markdown('<p class="section-header2">24CSM2R03</p>', unsafe_allow_html=True)
+   st.markdown('<p class="section-header3">MTECH CSIS</p>', unsafe_allow_html=True)
+   
+   
+
+with col1[2]:
+   st.image("IMAGES/tushar.jpeg")
+   st.markdown('<p class="section-header1">Tushar Singh</p>', unsafe_allow_html=True)
+   st.markdown('<p class="section-header2">24CSM2R21</p>', unsafe_allow_html=True)
+   st.markdown('<p class="section-header3">MTECH CSIS</p>', unsafe_allow_html=True)
+   
+   
+
+with col1[4]:
+   st.image("IMAGES/adarsh.png")
+   st.markdown('<p class="section-header1">Aashish Vishwakarma</p>', unsafe_allow_html=True)
+   st.markdown('<p class="section-header2">24CSM2R01</p>', unsafe_allow_html=True)
+   st.markdown('<p class="section-header3">MTECH CSIS</p>', unsafe_allow_html=True)
+   
