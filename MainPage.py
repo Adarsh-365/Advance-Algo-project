@@ -6,6 +6,9 @@ import streamlit as st
 from PIL import Image
 import cv2
 import numpy as np
+import base64
+from pathlib import Path
+# from utilities import lo
 
 st.set_page_config(
    
@@ -86,12 +89,13 @@ st.markdown(
         margin-bottom: 0;
         
     }
-    .stImage > img {
+    .img-fluid  {
         display: block;
         margin-left: auto;
         margin-right: auto;
         width: 150px; /* Adjust as needed */
         margin-top: 20px;
+        margin-bottom: 20px;
     }
     </style>
     """, unsafe_allow_html=True
@@ -105,9 +109,22 @@ st.markdown('<p class="subtitle">Advance Algorithms Project</p>', unsafe_allow_h
 st.markdown('<p class="section-header">Master of Technology</p>', unsafe_allow_html=True)
 st.markdown('<p class="section-header"> In </p>', unsafe_allow_html=True)
 st.markdown('<p class="section-header"> COMPUTER SCIENCE AND INFORMATION TECHNOLOGY </p>', unsafe_allow_html=True)
-col0 =  st.columns(5)
-with col0[2]:
-    st.image("logo.png")  # Replace "logo.png" with the actual filename or URL
+
+
+def img_to_bytes(img_path):
+      img_bytes = Path(img_path).read_bytes()
+      encoded = base64.b64encode(img_bytes).decode()
+      return encoded
+
+def img_to_html(img_path):
+      img_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(
+        img_to_bytes(img_path)
+      )
+      return img_html
+
+st.markdown(img_to_html('logo.png'), unsafe_allow_html=True)
+    
+
 st.markdown('<p class="subtitle1"> Subject :- Advance Algorithms </p>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle1"> Submitted to : Prof. Manish Kumar Bajpai </p>', unsafe_allow_html=True)
 st.markdown('<p class="h1head"> DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING </p>', unsafe_allow_html=True)
