@@ -129,7 +129,7 @@ with col1[0]:
    
 
 with col1[2]:
-   st.image("IMAGES/tushar.jpeg")
+   st.image("IMAGES/tushar.png")
    st.markdown('<p class="section-header1">Tushar Singh</p>', unsafe_allow_html=True)
    st.markdown('<p class="section-header2">24CSM2R21</p>', unsafe_allow_html=True)
    st.markdown('<p class="section-header3">MTECH CSIS</p>', unsafe_allow_html=True)
