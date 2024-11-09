@@ -155,7 +155,7 @@ with col1[2]:
    
 
 with col1[4]:
-   st.image("IMAGES/adarsh.png")
+   st.image("IMAGES/ashish.jpg")
    st.markdown('<p class="section-header1">Aashish Vishwakarma</p>', unsafe_allow_html=True)
    st.markdown('<p class="section-header2">24CSM2R01</p>', unsafe_allow_html=True)
    st.markdown('<p class="section-header3">MTECH CSIS</p>', unsafe_allow_html=True)
