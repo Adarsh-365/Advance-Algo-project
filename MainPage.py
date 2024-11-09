@@ -12,7 +12,7 @@ import numpy as np
 st.sidebar.image: st.sidebar.image("logo.png", use_column_width=True) 
 
 st.set_page_config(
-    page_title="Simple Streamlit App",
+   
     layout="wide",  # Use 'wide' to increase the app's width
     
 )
