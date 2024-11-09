@@ -7,15 +7,16 @@ from PIL import Image
 import cv2
 import numpy as np
 
-# Streamlit title
-# st.title("Image PreProcesing Techniques Project")
-st.sidebar.image: st.sidebar.image("logo.png", use_column_width=True) 
-
 st.set_page_config(
    
     layout="wide",  # Use 'wide' to increase the app's width
     
 )
+
+# Streamlit title
+# st.title("Image PreProcesing Techniques Project")
+st.sidebar.image: st.sidebar.image("logo.png", use_column_width=True) 
+
 # Title Page with Styling
 st.markdown(
     """
