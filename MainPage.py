@@ -99,7 +99,7 @@ st.markdown(
 
 # Project Title and Topic
 st.markdown('<h1 class="title">Image Processing Techniques</p>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Advance Algo Project</p>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle">Advance Algorithms Project</p>', unsafe_allow_html=True)
 
 # Team Members
 st.markdown('<p class="section-header">Master of Technology</p>', unsafe_allow_html=True)
