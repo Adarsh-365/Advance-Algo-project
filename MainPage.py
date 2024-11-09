@@ -10,6 +10,7 @@ import numpy as np
 st.set_page_config(
    
     layout="wide",  # Use 'wide' to increase the app's width
+    initial_sidebar_state="collapsed"
     
 )
 
