@@ -6,98 +6,40 @@ st.title("Image Segmentation")
 import streamlit as st
 import cv2
 import numpy as np
-from sklearn.cluster import KMeans
+
 import matplotlib.pyplot as plt
 from PIL import Image
-from io import BytesIO
 
-# Helper function to convert image to a downloadable format
-def convert_image(img):
-    pil_img = Image.fromarray(img)
-    buf = BytesIO()
-    pil_img.save(buf, format="PNG")
-    byte_im = buf.getvalue()
-    return byte_im
 
-# Header and description
-st.title('Enhanced KMeans Image Segmentation')
-st.write('Upload an image, select the number of clusters, and get a segmented output.')
 
-# Image uploader
-uploaded_image = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
+uploaded_file = st.file_uploader("Choose an image or drag and drop it here", type=["jpg", "jpeg", "png"])
+if uploaded_file is not None:
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    
+    st.write("Image Segmetation Using Threholding")
+   
+    # Decode the image using OpenCV
+    img = cv2.imdecode(file_bytes, 1)
 
-if uploaded_image is not None:
-    # Load image
-    image = Image.open(uploaded_image)
-    image_np = np.array(image)
+    # Convert the image from BGR (OpenCV format) to RGB (for display purposes)
+    CV2image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    CV2image = cv2.resize(CV2image, (500,500))
+    CV2image_copy = CV2image.copy()
+    gray_image = cv2.cvtColor(CV2image, cv2.COLOR_RGB2GRAY)
+    _, thresholded = cv2.threshold(gray_image, 128, 255, cv2.THRESH_BINARY)
 
-    # Display the original image
-    st.image(image_np, caption="Original Image", use_column_width=True)
+    col0 = st.columns(2)
+    
+    with col0[0]:
+        n1 =st.number_input("Enter val 1",value=128, min_value=0, max_value=255)
+        n2 =st.number_input("Enter val 2",value=255, min_value=n1+1, max_value=255)
+        _, thresholded = cv2.threshold(gray_image, n1, n2, cv2.THRESH_BINARY)
+    
+    with col0[1]:
+        st.image(thresholded, caption='Modifide Image', use_column_width=0)
+        st.image(CV2image_copy, caption='Original Image', use_column_width=0)
+        
 
-    # Preprocessing options (resize the image to speed up clustering if it's too large)
-    max_size = st.slider("Max image dimension (resize to speed up processing)", 100, 1000, 500)
-    if max(image_np.shape) > max_size:
-        scale_factor = max_size / max(image_np.shape)
-        new_size = (int(image_np.shape[1] * scale_factor), int(image_np.shape[0] * scale_factor))
-        image_np = cv2.resize(image_np, new_size, interpolation=cv2.INTER_AREA)
+   
+        
 
-    st.write(f"Image resized to: {image_np.shape}")
-
-    # Option to apply image filters (optional preprocessing)
-    apply_filter = st.checkbox("Apply Gaussian Blur (optional)", value=False)
-    if apply_filter:
-        image_np = cv2.GaussianBlur(image_np, (5, 5), 0)
-
-    # Reshape the image into a 2D array of pixels
-    pixels = image_np.reshape(-1, 3)
-
-    # Choose the number of clusters (with slider)
-    k = st.slider("Select number of clusters (regions)", 2, 20, 4)
-
-    # Option to calculate an optimal K (Elbow method suggestion)
-    optimal_k = st.checkbox("Suggest optimal number of clusters (Elbow method)", value=False)
-
-    if optimal_k:
-        distortions = []
-        K = range(2, 11)
-        for k_value in K:
-            kmeans_model = KMeans(n_clusters=k_value, random_state=0).fit(pixels)
-            distortions.append(kmeans_model.inertia_)
-
-        # Plot the elbow curve
-        plt.figure(figsize=(6, 4))
-        plt.plot(K, distortions, 'bx-')
-        plt.xlabel('Number of clusters')
-        plt.ylabel('Distortion')
-        plt.title('Elbow Method For Optimal k')
-        st.pyplot(plt)
-        st.write("The elbow point suggests the optimal number of clusters.")
-
-    # Apply KMeans clustering
-    kmeans = KMeans(n_clusters=k, random_state=0)
-    kmeans.fit(pixels)
-
-    # Replace each pixel with the center of its cluster
-    segmented_img = kmeans.cluster_centers_[kmeans.labels_]
-    segmented_img = segmented_img.reshape(image_np.shape)
-    segmented_img = segmented_img.astype(np.uint8)
-
-    # Post-processing option to smoothen the result (optional)
-    smoothen = st.checkbox("Apply post-processing (Bilateral Filter)", value=False)
-    if smoothen:
-        segmented_img = cv2.bilateralFilter(segmented_img, 9, 75, 75)
-
-    # Display segmented image
-    st.image(segmented_img, caption=f'Segmented Image with {k} clusters', use_column_width=True)
-
-    # Option to download the segmented image
-    segmented_image_data = convert_image(segmented_img)
-    st.download_button(
-        label="Download Segmented Image",
-        data=segmented_image_data,
-        file_name="segmented_image.png",
-        mime="image/png"
-    )
-
-else:
-    st.write("Please upload an image to start the segmentation process.")
