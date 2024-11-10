@@ -133,7 +133,9 @@ with cols[1]:
             
         st.image(CV2image, caption='Modifide Image', use_column_width=0)
         st.image(CV2image_copy, caption='Original Image', use_column_width=0)
-        _, buffer = cv2.imencode('.jpg', CV2image)
+        
+        rgb_image = cv2.cvtColor(CV2image,cv2.COLOR_BGR2RGB)
+        _, buffer = cv2.imencode('.jpg', rgb_image)
         lowered_contrast_image_bytes = buffer.tobytes()
 
         st.download_button(
@@ -142,3 +144,66 @@ with cols[1]:
             file_name=".jpg",
             mime="image/jpeg"
         )
+
+
+
+
+import numpy as np
+
+# Load an example image (you can replace this with any image you want to test)
+# In a real use case, allow the user to upload their own image for testing
+uploaded_file = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+    # Read and display the uploaded image
+    image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
+    st.image(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), caption="Original Image")
+
+    # --- 1. Gaussian Blurring ---
+    gaussian_blur = cv2.GaussianBlur(image, (5, 5), 0)
+    st.image(cv2.cvtColor(gaussian_blur, cv2.COLOR_BGR2RGB), caption="Gaussian Blurring")
+    st.markdown("""
+    **Gaussian Blurring** is effective for reducing Gaussian noise, a common noise pattern in digital images.
+    It applies a Gaussian kernel, which creates a weighted average of surrounding pixels, 
+    reducing high-frequency noise. Gaussian blur is best used when noise follows a bell-curve distribution.
+    """)
+
+    # --- 2. Median Blurring ---
+    median_blur = cv2.medianBlur(image, 5)
+    st.image(cv2.cvtColor(median_blur, cv2.COLOR_BGR2RGB), caption="Median Blurring")
+    st.markdown("""
+    **Median Blurring** is effective for removing salt-and-pepper noise, where individual pixels appear 
+    very bright or dark. It replaces each pixel with the median of neighboring pixels, which preserves edges 
+    better than Gaussian blurring, making it suitable for high-contrast noise.
+    """)
+
+    # --- 3. Bilateral Filtering ---
+    bilateral_filter = cv2.bilateralFilter(image, 9, 75, 75)
+    st.image(cv2.cvtColor(bilateral_filter, cv2.COLOR_BGR2RGB), caption="Bilateral Filtering")
+    st.markdown("""
+    **Bilateral Filtering** reduces noise while preserving edges, making it ideal for images where edges 
+    are important. It takes into account both spatial closeness and intensity differences, selectively 
+    blurring pixels to keep edges sharp.
+    """)
+
+    # --- 4. Non-Local Means Denoising ---
+    non_local_means = cv2.fastNlMeansDenoisingColored(image, None, 10, 10, 7, 21)
+    st.image(cv2.cvtColor(non_local_means, cv2.COLOR_BGR2RGB), caption="Non-Local Means Denoising")
+    st.markdown("""
+    **Non-Local Means Denoising** uses a weighted average of pixels across the image based on similarity. 
+    This technique is effective for images with Gaussian noise and is more computationally intensive, 
+    but it often produces cleaner results with fewer artifacts.
+    """)
+
+    # --- 5. Morphological Opening ---
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+    morphological_opening = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
+    st.image(cv2.cvtColor(morphological_opening, cv2.COLOR_BGR2RGB), caption="Morphological Opening")
+    st.markdown("""
+    **Morphological Opening** is a two-step operation combining erosion and dilation. 
+    It's especially useful for reducing noise in binary or thresholded images, 
+    where small noise artifacts can be removed while maintaining the overall structure.
+    """)
+
+else:
+    st.warning("Please upload an image to see the noise removal techniques in action.")
