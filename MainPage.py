@@ -167,6 +167,7 @@ st.title("Technologies Used in Our Project")
 
 # Technologies and their logos
 technologies = {
+    "Python": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
     "NumPy": "https://upload.wikimedia.org/wikipedia/commons/3/31/NumPy_logo_2020.svg",
     "Pandas": "https://pandas.pydata.org/static/img/pandas_mark.svg",
     "OpenCV": "https://upload.wikimedia.org/wikipedia/commons/3/32/OpenCV_Logo_with_text_svg_version.svg",
@@ -193,3 +194,4 @@ for i in range(len(tech_list)):
 
 # Optional: Add a summary
 st.write("In this project, we have used various libraries and technologies to process, analyze, and visualize data effectively.")
+
