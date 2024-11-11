@@ -160,3 +160,36 @@ with col1[4]:
    st.markdown('<p class="section-header2">24CSM2R01</p>', unsafe_allow_html=True)
    st.markdown('<p class="section-header3">MTECH CSIS</p>', unsafe_allow_html=True)
    
+   
+st.divider()
+# Title of the project
+st.title("Technologies Used in Our Project")
+
+# Technologies and their logos
+technologies = {
+    "NumPy": "https://upload.wikimedia.org/wikipedia/commons/3/31/NumPy_logo_2020.svg",
+    "Pandas": "https://pandas.pydata.org/static/img/pandas_mark.svg",
+    "OpenCV": "https://upload.wikimedia.org/wikipedia/commons/3/32/OpenCV_Logo_with_text_svg_version.svg",
+    "Streamlit": "https://streamlit.io/images/brand/streamlit-logo-primary-colormark-darktext.png",
+    "Pillow": "https://python-pillow.org/assets/images/pillow-logo-248x250.png",
+    "Matplotlib": "https://matplotlib.org/_static/images/logo2.svg"
+}
+
+# Create two columns
+col1, col2 = st.columns(2)
+
+# List of technology names and their column assignment
+tech_list = list(technologies.items())
+
+# Display technologies in two columns
+for i in range(len(tech_list)):
+    tech, logo_url = tech_list[i]
+    
+    # Display even-indexed technologies in the first column
+    with col1 if i % 2 == 0 else col2:
+        st.image(logo_url, width=200)  # Display the logo
+        st.write(f"**{tech}**")         # Display the technology name
+        st.write("This project leverages " + tech + " for various functionalities.")  # Description placeholder
+
+# Optional: Add a summary
+st.write("In this project, we have used various libraries and technologies to process, analyze, and visualize data effectively.")
