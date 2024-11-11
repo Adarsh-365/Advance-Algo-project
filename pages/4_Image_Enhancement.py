@@ -21,7 +21,7 @@ st.title("Image Enhancement")
 for i in range(20):
              st.write("")
 
-st.header("A COMPARATIVE STUDY OF HISTOGRAM EQUALIZATION BASED IMAGE ENHANCEMENT TECHNIQUES FOR BRIGHTNESS PRESERVATION AND CONTRAST ENHANCEMENT",divider="red")
+st.header("IMAGE ENHANCEMENT USING HISTOGRAM EQUALIZATION",divider="red")
 for i in range(25):
     st.write("")
 
@@ -106,7 +106,7 @@ if uploaded_file:
     
     for i in range(20):
         st.write("")
-    
+    st.markdown('<h1>Step1 : Convert image to grayscale </h1> ', unsafe_allow_html=True)
     col2 = st.columns(2)
     CV2image_resize1 = cv2.resize(CV2imageorg, (500,500))
    
@@ -150,7 +150,7 @@ if uploaded_file:
 
         st.table(df)
     with col2[1]:
-        st.markdown('<h3> Convert image to grayscale </h3> ', unsafe_allow_html=True)
+        
         CV2image_resize12 =CV2image_resize1.copy()
         CV2image_resize12 = cv2.rectangle(CV2image_resize12,pt1=(row_number,colm_number),pt2=(row_number+20,colm_number+20),color = (255, 255, 255),thickness = 1)
         st.image(CV2image_resize12, caption='Modifide Image', use_column_width=0)
@@ -167,7 +167,8 @@ if uploaded_file:
 # Streamlit app
     start_cal = st.button("Start Calculation")
     if start_cal:
-        st.title("Histogram of image")
+         
+        st.title("Step2 : Create Histogram of image")
 
         # Generate x values from 0 to 255
         x_values = np.arange(256)
@@ -219,7 +220,7 @@ if uploaded_file:
             
                     small_df[i]= [CV2image_resize1[j][i] for j in range(0,500)]
                     small_matrix.append([CV2image_resize1[j][i] for j in range(0,500)])
-                
+        
         df = pd.DataFrame.from_dict(small_df)
     
         # print(df)
@@ -233,7 +234,8 @@ if uploaded_file:
             for val in matrix_flat:
                 if ui==val:
                     uniqu_df[ui] +=1 
-        
+        st.title("Step3 : Calculate Count of each unique Pixel value")
+
         st.table(uniqu_df)
         
        
@@ -268,6 +270,9 @@ if uploaded_file:
         for i in range(len(grey_count)):
             swaf_dict[lsit_of_hist[i]] =hist_eqlise[i] 
         #
+        
+        st.title("Step4 : Calculate PDF then CDF Then multiply CDF value with 255 that will be new value of that pixel")
+
         st.table(dfq)
         matrix_flat2 =  matrix_flat.copy()
         
