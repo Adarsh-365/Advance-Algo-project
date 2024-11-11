@@ -100,7 +100,8 @@ if uploaded_file is not None:
         
             st.write(f"Then the size should be {resol[1]} x {resol[0]} x {resol[2]}  =  ",round(resol[0]*resol[1]*resol[2]/(1024),2) , " KILOBYTE")
     with _2_columns[0]:
-            file_size_bytes = os.path.getsize(uploaded_file.name)
+            file_size_bytes =   uploaded_file.size
+          
             st.write(f"But actual size is   =  ",round(file_size_bytes/(1024),2) , " KILOBYTE")
 st.divider() 
 
