@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
+# st.sidebar.image: st.sidebar.image("logo.png", use_column_width=True) 
 
 
 ch1 = st.checkbox("Threholding")
@@ -221,3 +222,62 @@ if ch3:
         3. Canny edge detection is used to detect edges in the image.
         4. Finally, contours are drawn to segment and highlight objects in the image.
         """)
+
+ch4 = st.checkbox("K-means Clutering")  
+
+if ch4:
+    # Function to perform KMeans segmentation
+    k = st.sidebar.slider("Number of Segments (k)", min_value=2, max_value=10, value=3)
+
+    def kmeans_segmentation(image, k):
+        # Convert image to RGB and reshape it
+        image = np.array(image)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        pixels = image.reshape((-1, 3))
+        
+        # Convert pixels to float32 for kmeans
+        pixels = np.float32(pixels)
+        
+        # KMeans criteria and apply KMeans
+        criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.2)
+        _, labels, centers = cv2.kmeans(pixels, k, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+        
+        # Convert centers back to 8 bit values
+        centers = np.uint8(centers)
+        
+        # Map labels to the centers to create the segmented image
+        segmented_image = centers[labels.flatten()]
+        segmented_image = segmented_image.reshape(image.shape)
+        
+        return segmented_image
+
+    # Streamlit app
+    st.title('K-Means Image Segmentation')
+
+    # Upload image
+    uploaded_image = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
+
+    # Number of clusters (segments)
+
+    if uploaded_image is not None:
+        # Open the image using PIL
+        image = Image.open(uploaded_image)
+        
+        # Show original image
+        
+        
+        # Apply KMeans segmentation
+        segmented_image = kmeans_segmentation(image, k)
+        
+        # Display segmented image
+        col1 = st.columns(2)
+        
+        with col1[0]:
+            st.image(image, caption="Original Image")
+        
+        with col1[1]:
+          st.image(segmented_image, caption=f"Segmented Image (k={k})")
+        
+        # Show additional info
+        st.write(f"Image dimensions: {image.size}")
+        st.write(f"Number of segments: {k}")
