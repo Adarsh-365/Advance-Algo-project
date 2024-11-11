@@ -176,6 +176,16 @@ technologies = {
     "Matplotlib": "https://matplotlib.org/_static/images/logo2.svg"
 }
 
+libraries = [
+    {"Python": "High-level programming language for versatile and dynamic application development."},
+    {"NumPy": "Library for numerical computing, offering array objects and mathematical functions."},
+    {"Pandas": "Data manipulation tool for structured data analysis and dataframes."},
+    {"OpenCV": "Open-source computer vision library for real-time image and video processing."},
+    {"Streamlit": "Framework for creating interactive web applications with Python scripts."},
+    {"Pillow": "Image processing library, enabling opening, manipulation, and saving image files."},
+    {"Matplotlib": "Plotting library for creating static, animated, and interactive visualizations."}
+]
+
 # Create two columns
 col1, col2 = st.columns(2)
 
@@ -189,7 +199,8 @@ for i in range(len(tech_list)):
     # Display even-indexed technologies in the first column
     with col1 if i % 2 == 0 else col2:
         st.image(logo_url, width=200)  # Display the logo
-        st.write(f"**{tech}**")         # Display the technology name
+        st.write(f"**{tech}**") 
+        st.write(libraries[i][tech])# Display the technology name
         st.write("This project leverages " + tech + " for various functionalities.")  # Description placeholder
 
 # Optional: Add a summary
