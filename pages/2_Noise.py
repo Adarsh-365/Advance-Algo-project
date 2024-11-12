@@ -71,9 +71,22 @@ def add_gaussian_noise(image, mean=0, sigma=25):
     print(noise)
     noisy_image = cv2.add(image, noise)
     return noisy_image
+
+def possion_noise(image):
+    
+            # image = cv2.imread('your_image.jpg', cv2.IMREAD_GRAYSCALE)  # Read in grayscale for simplicity
+            img = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) 
+            # Generate Poisson noise based on image intensity
+            poisson_noise = np.random.poisson(image / 255.0 * 60) / 60 * 255  # Adjust intensity by multiplying with a scalar
+
+            # Convert to uint8 to match the original image format
+            noisy_image = image + poisson_noise.astype(np.uint8)
+            return noisy_image
+
 gaussian_noise = False
 salt_and_pepper_noise = False
 Speckle_Noise = False
+possion_noise_var = False
 
 
 with cols[0]:
@@ -85,6 +98,7 @@ with cols[0]:
         salt_and_pepper_noise =  st.checkbox("Salt and Pepper Noise")
     if not salt_and_pepper_noise and not gaussian_noise:
         Speckle_Noise =  st.checkbox("Speckle Noise")
+    possion_noise_var = st.checkbox("possion noise")
     
     if Speckle_Noise:
         Mean_SN = st.slider("Mean for Speckle",0,100,0 )
@@ -130,6 +144,11 @@ with cols[1]:
         if salt_and_pepper_noise:
             CV2image = add_salt_and_pepper_noise(CV2image,salt_prob=Salt_Prob,pepper_prob=Paper_Prob)
         
+        
+        if possion_noise_var:
+              CV2image = possion_noise(CV2image)
+        
+
             
         st.image(CV2image, caption='Modifide Image', use_column_width=0)
         st.image(CV2image_copy, caption='Original Image', use_column_width=0)
