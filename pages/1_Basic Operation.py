@@ -102,7 +102,7 @@ with cols[0]:
     
     col1 = st.columns(3)
     with col1[0]:
-        sharpened = st.checkbox("sharpen_image")
+        sharpened = st.checkbox("Sharpen Image")
     with col1[1]:
         blurred = st.checkbox("Blurred Image")
     with col1[2]:
@@ -201,16 +201,25 @@ with cols[1]:
             
             
         st.image(CV2image, caption='Modifide Image', use_column_width=0)
+        st.image(CV2image_copy, caption='Original Image', use_column_width=0)
+       
         
-        
+        _, buffer = cv2.imencode('.jpg', CV2image)
+        lowered_contrast_image_bytes = buffer.tobytes()
+
+        st.download_button(
+            label="Download updated Image",
+            data=lowered_contrast_image_bytes,
+            file_name=".jpg",
+            mime="image/jpeg"
+        )
 
        
         
         
             
      
-        st.image(CV2image_copy, caption='Original Image', use_column_width=0)
-       
+        
 
 
 

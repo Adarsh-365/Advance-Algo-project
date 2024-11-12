@@ -171,7 +171,7 @@ st.divider()
 
 
 if uploaded_file is not None:
-    st.title("Step 1: Input image is divided into a small block which is having 8x8 dimensions")
+    st.title("Step 1: Input image is divided into a small block which is having 8x8 Pixel dimensions")
     image_copy = CV2imageorg_real.copy()
     image_copy= cv2.resize(image_copy,(1000,1000))
     # image_copy
@@ -293,12 +293,21 @@ if uploaded_file is not None:
     # st.divider() 
     
    
+    col16 = st.columns(2)
     
-    img = Image.open("IMAGES/DCT.png")
-    img= img.resize((500,500))
+    with col16[0]:
+        img = Image.open("IMAGES/DCT.png")
+        img= img.resize((500,500))
     
-    st.image(img, use_column_width=0)
-    st.write("The DCT transforms an 8×8 block of input values to a linear combination of these 64 patterns. The patterns are referred to as the two-dimensional DCT basis functions, and the output values are referred to as transform coefficients.")
+        st.image(img, use_column_width=0)
+    with col16[1]:
+        img = Image.open("IMAGES/qunt.png")
+        img= img.resize((500,500))
+    
+        st.image(img, use_column_width=0)
+    
+    st.write("DCT is done by comparing them with an 8x8, 64-frequency pattern where spatial frequency increases from left to right and top to bottom.")
+    st.write("This process converts an image from its frequency components, converting an 8x8 block where each pixel represents a brightness level into another level where each block represents the presence of a particular frequency component.")
     img = Image.open("IMAGES/zigzag.jpg")
     img= img.resize((500,500))
     
@@ -344,8 +353,19 @@ Q(u, v) = \text{round}\left( \frac{F(u, v)}{\text{Quantization Matrix}(u, v)} \r
     
    
 
-    # Title
+    
     st.title("Steps to Read a JPEG Image and Convert to RGB")
+    # Title
+    
+    img = Image.open("IMAGES/FOWRD.png")
+    # img= img.resize((500,500))
+
+    st.image(img, use_column_width=0)
+
+    img = Image.open("IMAGES/BACK.png")
+    # img= img.resize((500,500))
+
+    st.image(img, use_column_width=0)
 
     # Step 1: File Decoding and Decompression
     st.header("1. File Decoding and Decompression")
