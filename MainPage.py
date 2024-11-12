@@ -201,7 +201,7 @@ for i in range(len(tech_list)):
         st.image(logo_url, width=200)  # Display the logo
         st.write(f"**{tech}**") 
         st.write(libraries[i][tech])# Display the technology name
-        st.write("This project leverages " + tech + " for various functionalities.")  # Description placeholder
+        # st.write("This project leverages " + tech + " for various functionalities.")  # Description placeholder
 
 # Optional: Add a summary
 st.write("In this project, we have used various libraries and technologies to process, analyze, and visualize data effectively.")
