@@ -72,12 +72,12 @@ def add_gaussian_noise(image, mean=0, sigma=25):
     noisy_image = cv2.add(image, noise)
     return noisy_image
 
-def possion_noise(image):
+def possion_noise(image,intensity_factor):
     
             # image = cv2.imread('your_image.jpg', cv2.IMREAD_GRAYSCALE)  # Read in grayscale for simplicity
             img = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) 
             # Generate Poisson noise based on image intensity
-            poisson_noise = np.random.poisson(image / 255.0 * 60) / 60 * 255  # Adjust intensity by multiplying with a scalar
+            poisson_noise = np.random.poisson(image / 255.0 * intensity_factor) / intensity_factor * 255  # Adjust intensity by multiplying with a scalar
 
             # Convert to uint8 to match the original image format
             noisy_image = image + poisson_noise.astype(np.uint8)
@@ -87,7 +87,7 @@ gaussian_noise = False
 salt_and_pepper_noise = False
 Speckle_Noise = False
 possion_noise_var = False
-
+intensity_factor = 60
 
 with cols[0]:
     # Drag and drop or file uploader for images
@@ -99,7 +99,8 @@ with cols[0]:
     if not salt_and_pepper_noise and not gaussian_noise:
         Speckle_Noise =  st.checkbox("Speckle Noise")
     possion_noise_var = st.checkbox("possion noise")
-    
+    if possion_noise_var:
+         Mean_SN = st.slider("Percentage for Poission",0,100,0 )
     if Speckle_Noise:
         Mean_SN = st.slider("Mean for Speckle",0,100,0 )
         signa_SN =  st.slider("Variance for Speckle",0,100,25 )
@@ -146,7 +147,8 @@ with cols[1]:
         
         
         if possion_noise_var:
-              CV2image = possion_noise(CV2image)
+              
+              CV2image = possion_noise(CV2image,intensity_factor)
         
 
             
