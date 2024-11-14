@@ -1,4 +1,2 @@
 matplotlib
 streamlit-lottie
-opencv-python
-opencv-python-headless
