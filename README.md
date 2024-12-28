@@ -36,7 +36,7 @@ This web application provides an intuitive interface to explore several image pr
 - Explore thresholding, Watershed Algorithm, contours, and k-means clustering for image segmentation
 
 ## 👥 Team Members
-- **Adarsh Pandey**
+- **Adarsh Tayde**
 - **Aashish Vishwakarma**
 - **Tushar Singh**
 
