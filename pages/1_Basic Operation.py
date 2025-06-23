@@ -1,4 +1,4 @@
-c# Import the necessary libraries
+# Import the necessary libraries
 import streamlit as st
 
 st.set_page_config(layout="wide")
