@@ -1,4 +1,4 @@
-# Import the necessary libraries
+c# Import the necessary libraries
 import streamlit as st
 
 st.set_page_config(layout="wide")
@@ -200,8 +200,8 @@ with cols[1]:
             
             
             
-        st.image(CV2image, caption='Modifide Image', use_column_width=0)
-        st.image(CV2image_copy, caption='Original Image', use_column_width=0)
+        st.image(CV2image, caption='Modifide Image', use_container_width=0)
+        st.image(CV2image_copy, caption='Original Image', use_container_width=0)
        
         
         _, buffer = cv2.imencode('.jpg', CV2image)
