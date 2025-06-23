@@ -85,11 +85,11 @@ if uploaded_file:
     with col1[0]:
         contrast_factor = st.slider("Contrast %",min_value=0,max_value=200,value=100)
     with col1[1]:
-        st.image(CV2image_resize1, caption='Original Image', use_column_width='auto')
+        st.image(CV2image_resize1, caption='Original Image', use_container_width='auto')
     with col1[2]:
         lowered_contrast_image = cv2.convertScaleAbs(CV2image_resize1, alpha=contrast_factor/100, beta=0)
 
-        st.image(lowered_contrast_image, caption='Modified Image', use_column_width='auto')
+        st.image(lowered_contrast_image, caption='Modified Image', use_container_width='auto')
         
     
     
@@ -153,7 +153,7 @@ if uploaded_file:
         
         CV2image_resize12 =CV2image_resize1.copy()
         CV2image_resize12 = cv2.rectangle(CV2image_resize12,pt1=(row_number,colm_number),pt2=(row_number+20,colm_number+20),color = (255, 255, 255),thickness = 1)
-        st.image(CV2image_resize12, caption='Modifide Image', use_column_width=0)
+        st.image(CV2image_resize12, caption='Modifide Image', use_container_width=0)
     
 
     for i in range(20):
@@ -299,7 +299,7 @@ if uploaded_file:
               
               st.image(matrix_flat2c, caption="Modified image", channels="RGB")
         with col3[1]:
-            st.image(CV2image_resize1, caption='Original Image', use_column_width='auto')
+            st.image(CV2image_resize1, caption='Original Image', use_container_width='auto')
 
         # Display the plot in Streamlit
         
