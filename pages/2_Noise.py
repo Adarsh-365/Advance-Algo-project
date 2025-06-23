@@ -152,8 +152,8 @@ with cols[1]:
         
 
             
-        st.image(CV2image, caption='Modifide Image', use_column_width=0)
-        st.image(CV2image_copy, caption='Original Image', use_column_width=0)
+        st.image(CV2image, caption='Modifide Image', use_container_width=0)
+        st.image(CV2image_copy, caption='Original Image', use_container_width=0)
         
         rgb_image = cv2.cvtColor(CV2image,cv2.COLOR_BGR2RGB)
         _, buffer = cv2.imencode('.jpg', rgb_image)
