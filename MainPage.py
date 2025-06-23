@@ -19,7 +19,7 @@ st.set_page_config(
 
 # Streamlit title
 # st.title("Image PreProcesing Techniques Project")
-st.sidebar.image: st.sidebar.image("logo.png", use_column_width=True) 
+st.sidebar.image: st.sidebar.image("logo.png", use_container_width=True) 
 
 # Title Page with Styling
 st.markdown(
