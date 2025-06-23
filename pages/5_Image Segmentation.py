@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
-# st.sidebar.image: st.sidebar.image("logo.png", use_column_width=True) 
+# st.sidebar.image: st.sidebar.image("logo.png", use_container_width=True) 
 
 
 ch1 = st.checkbox("Threholding")
@@ -41,8 +41,8 @@ if ch1:
             _, thresholded = cv2.threshold(gray_image, n1, n2, cv2.THRESH_BINARY)
         
         with col0[1]:
-            st.image(thresholded, caption='Modifide Image', use_column_width=0)
-            st.image(CV2image_copy, caption='Original Image', use_column_width=0)
+            st.image(thresholded, caption='Modifide Image', use_container_width=0)
+            st.image(CV2image_copy, caption='Original Image', use_container_width=0)
 
 
     st.divider()
