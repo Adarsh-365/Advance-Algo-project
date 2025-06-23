@@ -142,7 +142,7 @@ with colm[1]:
         CV2imageorg1 = cv2.rectangle(CV2imageorg,pt1=(row_number,colm_number),pt2=(row_number+20,colm_number+20),color = (0, 0, 255),thickness = 1)
         CV2image_resize1 = cv2.resize(CV2imageorg1, (500,500))
         CV2image_copy = CV2image.copy()
-        st.image(CV2image_resize1, caption='Imported Image', use_column_width=0)
+        st.image(CV2image_resize1, caption='Imported Image', use_container_width=0)
         
 st.divider()
 
@@ -154,7 +154,7 @@ for i in range(3):
             seprate_color_image = CV2image_resize.copy()
             seprate_color_image[:,:,i]=0
             seprate_color_image[:,:,(i+1)%3]=0
-            st.image(seprate_color_image, caption=caption_for_three_image[i], use_column_width=0)
+            st.image(seprate_color_image, caption=caption_for_three_image[i], use_container_width=0)
                 
 st.divider()               
 if uploaded_file is not None:
@@ -180,7 +180,7 @@ if uploaded_file is not None:
             image_copy = cv2.line(image_copy,pt1=(i*10,0),pt2=(i*10,1000),color=(0,0,0),thickness=2)
             image_copy = cv2.line(image_copy,pt1=(0,i*10),pt2=(1000,i*10),color=(0,0,0),thickness=2)
     
-    st.image(image_copy, caption='Imported Image', use_column_width=0)
+    st.image(image_copy, caption='Imported Image', use_container_width=0)
     st.divider()
     st.title("Step 1: Transform Color")
    
@@ -200,7 +200,7 @@ if uploaded_file is not None:
                 seprate_color_image = CV2image_resize_small.copy()
                 seprate_color_image[:,:,i]=0
                 seprate_color_image[:,:,(i+1)%3]=0
-                st.image(seprate_color_image, caption=caption_for_three_image[i], use_column_width=0)
+                st.image(seprate_color_image, caption=caption_for_three_image[i], use_container_width=0)
     _3_clumn2 = st.columns(3)
     image_ycrcb = cv2.cvtColor(CV2image_resize_small, cv2.COLOR_BGR2YCrCb)
     Y, Cr, Cb = cv2.split(image_ycrcb)
@@ -209,7 +209,7 @@ if uploaded_file is not None:
     for i in range(3):
         with _3_clumn1[i]:
                 if uploaded_file is not None:
-                    st.image(ybr_image[i], caption=caption_for_YBR_three_image[i], use_column_width=0)
+                    st.image(ybr_image[i], caption=caption_for_YBR_three_image[i], use_container_width=0)
                     
     st.header("Croma Subsampling")
     st.write(
@@ -299,19 +299,19 @@ if uploaded_file is not None:
         img = Image.open("IMAGES/DCT.png")
         img= img.resize((500,500))
     
-        st.image(img, use_column_width=0)
+        st.image(img, use_container_width=0)
     with col16[1]:
         img = Image.open("IMAGES/qunt.png")
         img= img.resize((500,500))
     
-        st.image(img, use_column_width=0)
+        st.image(img, use_container_width=0)
     
     st.write("DCT is done by comparing them with an 8x8, 64-frequency pattern where spatial frequency increases from left to right and top to bottom.")
     st.write("This process converts an image from its frequency components, converting an 8x8 block where each pixel represents a brightness level into another level where each block represents the presence of a particular frequency component.")
     img = Image.open("IMAGES/zigzag.jpg")
     img= img.resize((500,500))
     
-    st.image(img, use_column_width=0)
+    st.image(img, use_container_width=0)
     # import streamlit as st
 
     # Title
@@ -360,12 +360,12 @@ Q(u, v) = \text{round}\left( \frac{F(u, v)}{\text{Quantization Matrix}(u, v)} \r
     img = Image.open("IMAGES/FOWRD.png")
     # img= img.resize((500,500))
 
-    st.image(img, use_column_width=0)
+    st.image(img, use_container_width=0)
 
     img = Image.open("IMAGES/BACK.png")
     # img= img.resize((500,500))
 
-    st.image(img, use_column_width=0)
+    st.image(img, use_container_width=0)
 
     # Step 1: File Decoding and Decompression
     st.header("1. File Decoding and Decompression")
